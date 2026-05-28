@@ -17,15 +17,19 @@ with open('dataFile/library.csv', 'r') as f :
         print('\n[도서관 정보 검색 결과]')
         print('-' * 80)
 
+        result = []
         for li in library_list :
         # li = [2020125001,서구어린이도서관,대전광역시 서구 정림동로,25 (서구어린이도서관),042-288-4830,042-288-5939,http://www.seogu.go.kr/learning/childlib,10:00~19:00,"매주 금요일, 법정공휴일"]
             if word in li[1] :
-                print_buffer = [li[1]] # 출력할 정보 리스트
+                print_buffer = [li[1]] # 도서관 한 개의 정보 리스트
                 for i in info :
                 # i = '개관시간'
                     info_num = info_list.index(i) + 2
                     print_buffer.append(li[info_num])
-                    
-                print(' | '.join(print_buffer) + ' |')
+                result.append(print_buffer) # 출력할 모든 도서관 리스트
 
+        result.sort() # 각 리스트의 0번 인덱스 기준으로 오름차순 정렬 
+        for r in result :
+            print(' | '.join(r) + ' |')
+            
         print('-' * 80 + '\n')
