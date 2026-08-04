@@ -129,7 +129,9 @@ def train() -> dict:
         #               (놓치면 안되는 고객이므로)
         'recall_churn':round(float(report['1']['recall']), 4),
         # presision_churn : <정밀도> 이탈이라고 예측한 것 중 몇 %가 실제 이탈이었나?
-        'precision_churn':round(float(report['1']['precision']), 4)
+        'precision_churn':round(float(report['1']['precision']), 4),
+        # .tolist() : numpy 배열은 JSON으로 저장할 수 없어서 파이썬 리스트로 변환
+        'confusion_matrix': confusion_matrix(y_test, predictions).tolist()
     }
 
     # 학습된 파이프라인(전처리+모델) 파일로 저장
